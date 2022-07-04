@@ -1,0 +1,1 @@
+convert -size 2x1 -define webp:lossless=1 xc:#000 bg.webp

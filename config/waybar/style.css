@@ -1,0 +1,49 @@
+* {
+  font-family: FontAwesome;
+  font-size: 13px;
+}
+
+window#waybar {
+  background-color: rgba(0, 5, 20, 0.8);
+}
+
+
+#battery {
+  margin-left: 25px;
+  color: #c4967a;
+}
+
+#battery.charging {
+  color: #8fffff;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+}
+
+#memory {
+  color: #987ac4;
+}
+
+#cpu {
+  color: #ac7ac4;
+}
+
+#clock {
+  color: #c57bad;
+}
+
+#pulseaudio {
+  color: #9b7ac4;
+}
+
+#language {
+  color: #b67ac4;
+}
+
+
+#tray {
+  margin-right: 25px;
+}

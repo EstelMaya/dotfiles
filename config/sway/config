@@ -1,0 +1,95 @@
+# vi:ft=zsh
+xwayland disable
+
+set $lalt Mod1
+set $ralt Mod3
+set $super Mod4
+set $caps Mod5
+
+font pango:monospace 9
+default_border pixel 1
+client.focused #350647 #460d36 #DDC5E6 #0000FF #350647
+titlebar_padding 2
+hide_edge_borders --i3 smart
+title_align center
+
+input 1:1:AT_Translated_Set_2_keyboard {
+	xkb_layout us,ru
+	xkb_options grp:rshift_toggle,lv3:caps_switch,lv5:ralt_switch
+}
+
+input 1267:91:Elan_Touchpad {
+	dwt enabled
+	tap enabled
+	tap_button_map lrm
+	natural_scroll enabled
+	pointer_accel 1
+	scroll_factor 2.5
+}
+
+output * bg wallpapers.jpg fill #37146B
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY
+
+exec mako
+exec gammastep
+exec swayidle -w \
+			timeout 600 'swaymsg output - dpms off' \
+				resume 'swaymsg output - dpms on' \
+			timeout 1800 'systemctl suspend' \
+				resume 'swaymsg output - dpms on'
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym $ralt+Print exec grim - | wl-copy -t image/png
+bindsym Print exec grim -g "$(slurp)" - | wl-copy -t image/png
+
+bindsym $ralt+Return exec foot
+
+bindsym --to-code {
+	# window movement
+	$caps+a focus left
+	$caps+s focus down
+	$caps+d focus up
+	$caps+f focus right
+
+	$caps+$lalt+a move left
+	$caps+$lalt+s move down
+	$caps+$lalt+d move up
+	$caps+$lalt+f move right
+
+	$caps+q kill
+	$caps+w layout tabbed
+	$caps+e splith
+	$caps+r splitv
+	$caps+t floating toggle
+
+	# launching
+	$super+f exec telegram-desktop
+	$super+d exec brave
+	$super+s exec fuzzel
+	$super+a exec keepassxc
+	$super+e exec foot ranger
+	$super+q exec qbittorrent
+	$super+c exec foot vi .config/sway/config
+
+	# system management
+	$caps+z exec systemctl poweroff
+	$caps+x exec systemctl suspend
+	$caps+v exec systemctl reboot
+	$caps+c reload
+
+	$ralt+p exec pavucontrol
+	$ralt+m output - dpms toggle
+	$ralt+u exec swaymsg exit
+}
+
+bar swaybar_command waybar

@@ -1,0 +1,49 @@
+{
+	"modules-left": ["battery", "memory", "cpu"], 
+	"spacing": 250,
+	"modules-center": ["clock"],
+	"modules-right": ["sway/language", "pulseaudio", "tray"],
+	"tray": {
+		"spacing": 10
+	},
+	"clock": {
+		"format": "{:%a %d-%m-%Y %H:%M}"
+	},
+	"cpu": {
+		"format": "{usage}% "
+	},
+	"memory": {
+		"format": "{}% "
+	},
+	"sway/language": {
+		"format": "{long}"
+	},
+	"battery": {
+	"states": {
+		"warning": 30,
+		"critical": 15
+	},
+		"format": "{capacity}% {icon}",
+		"format-charging": "{capacity}% ",
+		"format-plugged": "{capacity}% ",
+		"format-alt": "{time} {icon}",
+		"format-icons": ["", "", "", "", ""]
+	},
+	"pulseaudio": {
+		"format": "{volume}% {icon} {format_source}",
+		"format-bluetooth": "{volume}% {icon} {format_source}",
+		"format-bluetooth-muted": " {icon} {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": "{volume}% ",
+		"format-source-muted": "",
+		"format-icons": {
+		    "headphone": "",
+		    "hands-free": "",
+		    "headset": "",
+		    "phone": "",
+		    "portable": "",
+		    "car": "",
+		    "default": ["", "", ""]
+		}
+	}
+}
